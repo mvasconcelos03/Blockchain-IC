@@ -1,0 +1,52 @@
+test:
+  workers:
+    type: local
+    number: 1
+  rounds:
+    - label: insert Patient
+      txNumber: 10000
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 10
+      workload: 
+        module: ./benchmarks/insertPatient.js
+    - label: insert D_Items
+      txNumber: 10000
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 10
+      workload: 
+        module: ./benchmarks/insertDitem.js
+    - label: insert Prescription
+      txNumber: 10000
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 10
+      workload: 
+        module: ./benchmarks/insertPrescription.js
+    - label: insert InputeventMv
+      txNumber: 10000
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 10
+      workload: 
+        module: ./benchmarks/insertInputeventMv.js
+    - label: query Patient by subjectId
+      txNumber: 10000
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 10
+      workload: 
+        module: ./benchmarks/queryPatientId.js
+monitor:
+  type:
+  - docker
+  docker:
+    names:
+    - all
+  interval: 1
